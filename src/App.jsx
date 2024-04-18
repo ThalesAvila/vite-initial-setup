@@ -1,18 +1,11 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import Button from "./Button";
-import Gallery from "./Gallery";
-import Table from "./Table";
+import ExemploChildren from "./ExemploChildren";
+import Layout from "./Layout";
 
-const App = () => {
-  return (
-    <>
-      {/* <Table />
-      <Button /> */}
-      <Gallery />
-    </>
-  );
-};
+export default function App() {
+  return <Layout>Produtos</Layout>;
+}
 
 const container = document.getElementById("root");
 const root = createRoot(container);
