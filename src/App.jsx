@@ -9,27 +9,15 @@ import Calculadora from "./aula5/Calculadora";
 import Counter from "./aula4/Counter";
 import FocusInput from "./aula5/FocusInput";
 import Gallery from "./aula3/Gallery";
+import Layout3 from "./ecommerce/Layout3";
+import Exemplo from "./aula6/Exemplo";
 
-import "./aula5/dog-friends.css";
-
-const FirstComponent = () => <h1>✨ First render prop! ✨</h1>;
-const SecondComponent = () => <h2>🔥 Second render prop! 🔥</h2>;
-const ThirdComponent = () => <h3>🚀 Third render prop! 🚀</h3>;
-
-const ExemploRenderProps = () => {
-  return (
-    <RenderProps
-      renderFirstComponent={() => <FirstComponent />}
-      renderSecondComponent={() => <SecondComponent />}
-      renderThirdComponent={() => <ThirdComponent />}
-    />
-  );
-};
+import "./assets/css/index.css";
 
 export default function App() {
   return (
     <>
-      <Gallery />
+      <Layout3 />
     </>
   );
 }
