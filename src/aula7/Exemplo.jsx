@@ -1,18 +1,22 @@
-import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
+import ProductCard from "./ProductCard";
+import Spinner from "./Spinner";
 
 export default function ProdutosPorCategoria() {
   const [number, setNumber] = useState(0);
   const [category, setCategory] = useState("jewelery");
   const [products, setProducts] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch(`https://fakestoreapi.com/products/category/${category}`)
       .then(function (response) {
         return response.json();
       })
       .then(function (categoryProducts) {
         setProducts(categoryProducts);
+        setLoading(false);
       });
   }, [category]);
 
@@ -35,11 +39,15 @@ export default function ProdutosPorCategoria() {
       >
         +1
       </button>
-      <div className="flex">
-        {products?.map(({ title, price, image }) => {
-          return <ProductCard title={title} price={price} image={image} />;
-        })}
-      </div>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="flex">
+          {products?.map(({ title, price, image }) => {
+            return <ProductCard title={title} price={price} image={image} />;
+          })}
+        </div>
+      )}
     </>
   );
 }

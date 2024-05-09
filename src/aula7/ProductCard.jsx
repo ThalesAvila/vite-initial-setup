@@ -10,11 +10,6 @@ export default function ProductCard({ title, price, discount, image }) {
           src={image}
           alt="product image"
         />
-        <img
-          class="peer peer-hover:right-0 absolute top-0 -right-96 h-full w-full object-cover transition-all delay-100 duration-1000 hover:right-0"
-          src={image}
-          alt="product image"
-        />
         {discount && (
           <span class="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
             {discount}% OFF

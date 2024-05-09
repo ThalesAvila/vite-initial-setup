@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-import Exemplo from "./aula7/Exemplo";
+import Exemplo from "./aula8/RouteExample";
 
 import "./assets/css/index.css";
 
