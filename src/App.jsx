@@ -1,14 +1,14 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-import Exemplo from "./aula9/ContextExample";
+import Store from "./aula10/eccommerce/Store";
 
 import "./assets/css/index.css";
 
 export default function App() {
   return (
     <>
-      <Exemplo />
+      <Store />
     </>
   );
 }
