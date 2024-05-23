@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
+import { getDoc, doc } from "firebase/firestore/lite";
 import CartContext from "./CartContext";
+import db from "../Firestore";
 
 export default function Item() {
   const { id } = useParams();
@@ -12,15 +14,13 @@ export default function Item() {
   const { dispatch } = useContext(CartContext);
 
   useEffect(() => {
-    setLoading(true);
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (fetchedProduct) {
-        setProduct(fetchedProduct);
-        setLoading(false);
-      });
+    (async function () {
+      const docRef = doc(db, "products", id);
+
+      const productSnapshot = await getDoc(docRef);
+      const product = productSnapshot.data();
+      setProduct(product);
+    })();
   }, [id]);
 
   const handleAddItem = () => {
@@ -46,7 +46,7 @@ export default function Item() {
         <h1>Carregando...</h1>
       ) : (
         <div>
-          <h1>{product.title}</h1>
+          <h1>{product.name}</h1>
           <h2>${product.price}</h2>
           <img src={product.image} alt="" />
           <input type="number" value={quantity} onChange={handleChange} />

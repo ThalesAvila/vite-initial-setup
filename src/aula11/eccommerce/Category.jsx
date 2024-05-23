@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
+import { collection, getDocs, query, where } from "firebase/firestore/lite";
 import { useState, useEffect } from "react";
 import ProductLink from "./ProductLink";
+import db from "../Firestore";
 
 export default function Category() {
   const { id } = useParams();
@@ -10,14 +12,18 @@ export default function Category() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://fakestoreapi.com/products/category/${id}`)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (products) {
-        setProducts(products);
-        setLoading(false);
-      });
+    (async function () {
+      const productsCol = collection(db, "products");
+      const q = query(productsCol, where("category", "==", id));
+      const productsSnapshot = await getDocs(q);
+      const products = productsSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      console.log({ products });
+      setProducts(products);
+      setLoading(false);
+    })();
   }, [id]);
 
   return (
@@ -25,7 +31,7 @@ export default function Category() {
       {loading ? (
         <h1>Carregando...</h1>
       ) : (
-        products.map(({ title, id }) => <ProductLink title={title} id={id} />)
+        products.map(({ name, id }) => <ProductLink name={name} id={id} />)
       )}
     </div>
   );

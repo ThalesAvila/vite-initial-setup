@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore/lite";
 import ProductLink from "./ProductLink";
+import db from "../Firestore";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -7,14 +9,17 @@ export default function Home() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://fakestoreapi.com/products?limit=10`)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (products) {
-        setProducts(products);
-        setLoading(false);
-      });
+    (async function () {
+      const productsCol = collection(db, "products");
+      const productsSnapshot = await getDocs(productsCol);
+      const products = productsSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      console.log({ products });
+      setProducts(products);
+      setLoading(false);
+    })();
   }, []);
 
   return (
@@ -22,7 +27,9 @@ export default function Home() {
       {loading ? (
         <h1>Carregando...</h1>
       ) : (
-        products.map(({ title, id }) => <ProductLink title={title} id={id} />)
+        products.map(({ name, id }) => (
+          <ProductLink key={id} name={name} id={id} />
+        ))
       )}
     </div>
   );
