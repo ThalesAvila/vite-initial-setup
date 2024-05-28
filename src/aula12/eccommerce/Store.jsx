@@ -8,6 +8,8 @@ import Item from "./Item";
 import Header from "./Header";
 import AuthContext from "./AuthContext";
 import CartContext from "./CartContext";
+import Orders from "./Orders";
+import Order from "./Order";
 import productReducer from "./productReducer";
 
 export default function ContextExample() {
@@ -25,35 +27,13 @@ export default function ContextExample() {
             <Route path="/item/:id" element={<Item />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path="/filho" element={<Filho />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/orders/:id" element={<Order />} />
           </Routes>
         </BrowserRouter>
       </CartContext.Provider>
     </AuthContext.Provider>
   );
-}
-
-function Filho() {
-  return (
-    <>
-      <h1>Componente Filho</h1>
-      <Neto />
-    </>
-  );
-}
-
-function Neto() {
-  return (
-    <>
-      <h1>Componente Neto</h1>
-      <Bisneto />
-    </>
-  );
-}
-
-function Bisneto() {
-  const { auth } = useContext(AuthContext);
-  return <h1>{`${auth}`}</h1>;
 }
 
 const initialState = [

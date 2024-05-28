@@ -106,6 +106,14 @@ const Navigation = () => {
                 >
                   Checkout
                 </Link>
+                <Link
+                  to="/orders"
+                  className={`${getActiveStyle(
+                    "/orders"
+                  )} rounded-md px-3 py-2 text-sm font-medium`}
+                >
+                  Orders
+                </Link>
               </div>
             </div>
           </div>
@@ -231,6 +239,14 @@ const Navigation = () => {
             )} block rounded-md px-3 py-2 text-sm font-medium`}
           >
             Checkout
+          </Link>
+          <Link
+            to="/orders"
+            className={`${getActiveStyle(
+              "/orders"
+            )} block rounded-md px-3 py-2 text-sm font-medium`}
+          >
+            Orders
           </Link>
         </div>
       </div>
