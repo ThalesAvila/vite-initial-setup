@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore/lite";
 import ProductLink from "./ProductLink";
-import db from "../Firestore";
+import { db } from "../firebase";
 
 export default function Home() {
   const [products, setProducts] = useState([]);

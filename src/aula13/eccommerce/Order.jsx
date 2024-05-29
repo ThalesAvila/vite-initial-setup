@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc } from "firebase/firestore/lite";
 import { useParams } from "react-router-dom";
 
-import db from "../Firestore";
+import { db } from "../firebase";
 
 export default function Order() {
   const [order, setOrder] = useState();

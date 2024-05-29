@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore/lite";
 import { Link } from "react-router-dom";
 
-import db from "../Firestore";
+import { db } from "../firebase";
 
 const OrderRow = ({ id, total, buyer }) => {
   return (

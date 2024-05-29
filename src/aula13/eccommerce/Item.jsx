@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { getDoc, doc } from "firebase/firestore/lite";
 import CartContext from "./CartContext";
-import db from "../Firestore";
+import { db } from "../firebase";
 
 export default function Item() {
   const { id } = useParams();

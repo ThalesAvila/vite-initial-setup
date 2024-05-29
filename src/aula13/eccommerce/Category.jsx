@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { collection, getDocs, query, where } from "firebase/firestore/lite";
 import { useState, useEffect } from "react";
 import ProductLink from "./ProductLink";
-import db from "../Firestore";
+import { db } from "../firebase";
 
 export default function Category() {
   const { id } = useParams();

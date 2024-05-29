@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { collection, addDoc } from "firebase/firestore/lite";
 
 import CartContext from "./CartContext";
-import db from "../Firestore";
+import { db } from "../Firestore";
 
 export default function Checkout() {
   const { products, dispatch } = useContext(CartContext);
