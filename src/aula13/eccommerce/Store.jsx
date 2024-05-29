@@ -6,20 +6,20 @@ import Checkout from "./Checkout";
 import Home from "./Home";
 import Item from "./Item";
 import Header from "./Header";
-import AuthContext from "./AuthContext";
 import CartContext from "./CartContext";
 import Orders from "./Orders";
 import Order from "./Order";
 import productReducer from "./productReducer";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import { AuthProvider } from "../contexts/authContext";
 
-export default function ContextExample() {
+export default function Store() {
   const [products, dispatch] = useReducer(productReducer, initialState);
   const [auth, setAuth] = useState(false);
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthProvider>
       <CartContext.Provider value={{ products, dispatch }}>
         <BrowserRouter>
           <Header />
@@ -36,7 +36,7 @@ export default function ContextExample() {
           </Routes>
         </BrowserRouter>
       </CartContext.Provider>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }
 

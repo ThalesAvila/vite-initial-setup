@@ -35,6 +35,7 @@ export default function Checkout() {
   return (
     <div>
       <h1>Checkout</h1>
+      {currentUser.email}
       <ul>
         {products.map((product) => (
           <li key={product.id}>
