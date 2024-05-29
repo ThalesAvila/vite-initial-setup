@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function SignUp() {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -39,12 +40,12 @@ export default function Login() {
                 Password
               </label>
               <div className="text-sm">
-                <a
-                  href="#"
+                <Link
+                  to="/login"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
-                  Forgot password?
-                </a>
+                  Already have an account?
+                </Link>
               </div>
             </div>
             <div className="mt-2">
