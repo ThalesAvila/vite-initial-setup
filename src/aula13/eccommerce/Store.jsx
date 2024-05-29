@@ -11,6 +11,8 @@ import CartContext from "./CartContext";
 import Orders from "./Orders";
 import Order from "./Order";
 import productReducer from "./productReducer";
+import Login from "./Login";
+import SignUp from "./SignUp";
 
 export default function ContextExample() {
   const [products, dispatch] = useReducer(productReducer, initialState);
@@ -29,6 +31,8 @@ export default function ContextExample() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/orders/:id" element={<Order />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
           </Routes>
         </BrowserRouter>
       </CartContext.Provider>
