@@ -4,8 +4,11 @@ import { collection, addDoc } from "firebase/firestore/lite";
 import CartContext from "./CartContext";
 import { db } from "../Firestore";
 
+import { useAuth } from "../..//contexts/authContext";
+
 export default function Checkout() {
   const { products, dispatch } = useContext(CartContext);
+  const { currentUser } = useAuth();
 
   const total = products
     .reduce((prevProduct, nextProduct) => {

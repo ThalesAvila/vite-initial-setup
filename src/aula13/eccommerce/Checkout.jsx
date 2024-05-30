@@ -4,8 +4,11 @@ import { collection, addDoc } from "firebase/firestore/lite";
 import CartContext from "./CartContext";
 import { db } from "../firebase";
 
+import { useAuth } from "../contexts/authContext";
+
 export default function Checkout() {
   const { products, dispatch } = useContext(CartContext);
+  const { currentUser } = useAuth();
 
   const total = products
     .reduce((prevProduct, nextProduct) => {
@@ -35,7 +38,7 @@ export default function Checkout() {
   return (
     <div>
       <h1>Checkout</h1>
-      {currentUser.email}
+      {currentUser?.email}
       <ul>
         {products.map((product) => (
           <li key={product.id}>
