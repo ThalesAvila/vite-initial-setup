@@ -27,7 +27,7 @@ export default function Order() {
   };
 
   return (
-    <div>
+    <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
       <ul>
         {order?.items?.map((product) => (
           <li key={product.id}>

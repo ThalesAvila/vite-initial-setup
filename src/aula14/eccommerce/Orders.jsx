@@ -50,7 +50,10 @@ export default function Orders() {
   }, []);
 
   return (
-    <div className="flex flex-col">
+    <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
+      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+        Orders
+      </h2>
       <div className="-m-1.5 overflow-x-auto">
         <div className="p-1.5 min-w-full inline-block align-middle">
           <div className="overflow-hidden">
