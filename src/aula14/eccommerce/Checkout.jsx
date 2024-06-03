@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import { collection, addDoc } from "firebase/firestore/lite";
 
-import CartContext from "./CartContext";
 import ProductTable from "./ProductTable";
 import { db } from "../firebase";
 
 import { useAuth } from "../contexts/authContext";
+import { useCart } from "../contexts/cartContext";
 
 const ProductRow = ({ quantity, title, total, onClick }) => {
   return (
@@ -35,7 +34,7 @@ const ProductRow = ({ quantity, title, total, onClick }) => {
 };
 
 export default function Checkout() {
-  const { products, dispatch } = useContext(CartContext);
+  const { products, dispatch } = useCart();
   const { currentUser } = useAuth();
 
   const total = products
@@ -83,15 +82,6 @@ export default function Checkout() {
           />
         ))}
       </ProductTable>
-      <div className="flex justify-end items-center">
-        <span className="px-2 font-bold">Total: ${total}</span>
-        <button
-          onClick={handleOrder}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Comprar
-        </button>
-      </div>
     </div>
   );
 }

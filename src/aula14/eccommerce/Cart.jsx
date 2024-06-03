@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import CartContext from "./CartContext";
+import React from "react";
 import ProductTable from "./ProductTable";
+import { useCart } from "../contexts/cartContext";
 
 const ProductRow = ({ quantity, title, total, onClick, onChange }) => {
   return (
@@ -93,7 +93,7 @@ const ProductRow = ({ quantity, title, total, onClick, onChange }) => {
 };
 
 export default function Cart() {
-  const { products, dispatch } = useContext(CartContext);
+  const { products, dispatch } = useCart();
 
   const total = products
     ?.reduce((prevProduct, currProduct) => {
