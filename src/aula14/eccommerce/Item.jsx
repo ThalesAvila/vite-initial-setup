@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { getDoc, doc } from "firebase/firestore/lite";
-import CartContext from "./CartContext";
+
+import { useCart } from "../contexts/cartContext";
 import { db } from "../firebase";
 
 export default function Item() {
@@ -11,7 +12,7 @@ export default function Item() {
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
-  const { dispatch } = useContext(CartContext);
+  const { dispatch } = useCart();
 
   useEffect(() => {
     (async function () {
@@ -28,6 +29,7 @@ export default function Item() {
       type: "added",
       product: {
         ...product,
+        title: product.name,
         quantity,
       },
     });

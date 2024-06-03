@@ -37,6 +37,8 @@ export default function Checkout() {
   const { products, dispatch } = useCart();
   const { currentUser } = useAuth();
 
+  console.log({ currentUser });
+
   const total = products
     .reduce((prevProduct, nextProduct) => {
       return prevProduct + nextProduct.quantity * nextProduct.price;
@@ -49,6 +51,7 @@ export default function Checkout() {
         buyer: {
           name: "Thales",
           email: "dev.thales.avila@gmail.com",
+          id: currentUser.uid,
         },
         items: products,
         total,
@@ -82,6 +85,15 @@ export default function Checkout() {
           />
         ))}
       </ProductTable>
+      <div className="flex justify-end items-center">
+        <span className="px-2 font-bold">Total: ${total}</span>
+        <button
+          onClick={handleOrder}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Comprar
+        </button>
+      </div>
     </div>
   );
 }
