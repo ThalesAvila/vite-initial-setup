@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-import Store from "./aula13/eccommerce/Store";
+import Store from "./aula14/eccommerce/Store";
 
 import "./assets/css/index.css";
 
