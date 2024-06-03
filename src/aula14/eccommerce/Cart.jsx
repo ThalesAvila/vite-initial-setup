@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import CartContext from "./CartContext";
+import ProductTable from "./ProductTable";
 
 const ProductRow = ({ quantity, title, total, onClick, onChange }) => {
   return (
@@ -93,65 +94,41 @@ const ProductRow = ({ quantity, title, total, onClick, onChange }) => {
 
 export default function Cart() {
   const { products, dispatch } = useContext(CartContext);
+
+  const total = products
+    ?.reduce((prevProduct, currProduct) => {
+      return prevProduct + currProduct.quantity * currProduct.price;
+    }, 0)
+    .toFixed(2);
+
   return (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
       <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
         Cart
       </h2>
-      <div className="-m-1.5 overflow-x-auto">
-        <div className="p-1.5 min-w-full inline-block align-middle">
-          <div className="overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
-                  >
-                    Quantity
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
-                  >
-                    Product Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-medium text-gray-500 uppercase dark:text-neutral-500 text-center"
-                  >
-                    Total
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-medium text-gray-500 uppercase dark:text-neutral-500 text-center"
-                  >
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              {products.map(({ id, quantity, title, price }) => (
-                <ProductRow
-                  quantity={quantity}
-                  title={title}
-                  total={(price * quantity).toFixed(2)}
-                  onClick={() => {
-                    dispatch({
-                      type: "removed",
-                      id,
-                    });
-                  }}
-                  onChange={(newQuantity) => {
-                    dispatch({
-                      type: "changed",
-                      product: { id, quantity: newQuantity, title, price },
-                    });
-                  }}
-                />
-              ))}
-            </table>
-          </div>
-        </div>
+      <ProductTable>
+        {products.map(({ id, quantity, title, price }) => (
+          <ProductRow
+            quantity={quantity}
+            title={title}
+            total={(price * quantity).toFixed(2)}
+            onClick={() => {
+              dispatch({
+                type: "removed",
+                id,
+              });
+            }}
+            onChange={(newQuantity) => {
+              dispatch({
+                type: "changed",
+                product: { id, quantity: newQuantity, title, price },
+              });
+            }}
+          />
+        ))}
+      </ProductTable>
+      <div className="flex justify-end items-center">
+        <span className="px-2 font-bold">Total: ${total}</span>
       </div>
     </div>
   );

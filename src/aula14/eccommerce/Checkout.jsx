@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { collection, addDoc } from "firebase/firestore/lite";
 
 import CartContext from "./CartContext";
+import ProductTable from "./ProductTable";
 import { db } from "../firebase";
 
 import { useAuth } from "../contexts/authContext";
@@ -67,63 +68,30 @@ export default function Checkout() {
       <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
         Checkout
       </h2>
-      <div className="-m-1.5 overflow-x-auto">
-        <div className="p-1.5 min-w-full inline-block align-middle">
-          <div className="overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
-                  >
-                    Quantity
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
-                  >
-                    Product Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-medium text-gray-500 uppercase dark:text-neutral-500 text-center"
-                  >
-                    Total
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-medium text-gray-500 uppercase dark:text-neutral-500 text-center"
-                  >
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              {products.map(({ id, quantity, title, price }) => (
-                <ProductRow
-                  quantity={quantity}
-                  title={title}
-                  total={(price * quantity).toFixed(2)}
-                  onClick={() => {
-                    dispatch({
-                      type: "removed",
-                      id,
-                    });
-                  }}
-                />
-              ))}
-            </table>
-          </div>
-        </div>
+      <ProductTable>
+        {products.map(({ id, quantity, title, price }) => (
+          <ProductRow
+            quantity={quantity}
+            title={title}
+            total={(price * quantity).toFixed(2)}
+            onClick={() => {
+              dispatch({
+                type: "removed",
+                id,
+              });
+            }}
+          />
+        ))}
+      </ProductTable>
+      <div className="flex justify-end items-center">
+        <span className="px-2 font-bold">Total: ${total}</span>
+        <button
+          onClick={handleOrder}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Comprar
+        </button>
       </div>
-      <ul></ul>
-      Total: ${total}
-      <button
-        onClick={handleOrder}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Comprar
-      </button>
     </div>
   );
 }
