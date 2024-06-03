@@ -98,20 +98,20 @@ export default function Checkout() {
                     Action
                   </th>
                 </tr>
-                {products.map(({ id, quantity, title, price }) => (
-                  <ProductRow
-                    quantity={quantity}
-                    title={title}
-                    total={(price * quantity).toFixed(2)}
-                    onClick={() => {
-                      dispatch({
-                        type: "removed",
-                        id,
-                      });
-                    }}
-                  />
-                ))}
               </thead>
+              {products.map(({ id, quantity, title, price }) => (
+                <ProductRow
+                  quantity={quantity}
+                  title={title}
+                  total={(price * quantity).toFixed(2)}
+                  onClick={() => {
+                    dispatch({
+                      type: "removed",
+                      id,
+                    });
+                  }}
+                />
+              ))}
             </table>
           </div>
         </div>

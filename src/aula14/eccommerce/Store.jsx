@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useContext, useReducer } from "react";
+import { useReducer } from "react";
 import Cart from "./Cart";
 import Category from "./Category";
 import Checkout from "./Checkout";
@@ -16,7 +16,6 @@ import { AuthProvider } from "../contexts/authContext";
 
 export default function Store() {
   const [products, dispatch] = useReducer(productReducer, initialState);
-  const [auth, setAuth] = useState(false);
 
   return (
     <AuthProvider>
