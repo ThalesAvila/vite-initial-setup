@@ -113,14 +113,37 @@ export default function Order() {
       const orderData = orderSnapshot.data();
 
       setOrder(orderData);
-      console.log({ orderData });
     })();
-  }, []);
+  }, [id]);
 
-  const handleUpdatePrice = () => {
+  const handleUpdate = () => {
     const docRef = doc(db, "orders", id);
 
-    updateDoc(docRef, { total: 9999 });
+    updateDoc(docRef, { ...order });
+  };
+
+  const removeItem = (id) => {
+    setOrder({
+      ...order,
+      items: order.items.filter((item) => {
+        return item.id !== id;
+      }),
+    });
+  };
+
+  const updateQuantity = (id, newQuantity) => {
+    setOrder({
+      ...order,
+      items: order.items.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            quantity: newQuantity,
+          };
+        }
+        return item;
+      }),
+    });
   };
 
   return (
@@ -132,24 +155,16 @@ export default function Order() {
             title={title}
             total={(price * quantity).toFixed(2)}
             onClick={() => {
-              dispatch({
-                type: "removed",
-                id,
-              });
+              removeItem(id);
             }}
-            onChange={(newQuantity) => {
-              dispatch({
-                type: "changed",
-                product: { id, quantity: newQuantity, title, price },
-              });
-            }}
+            onChange={(newQuantity) => updateQuantity(id, newQuantity)}
           />
         ))}
       </ProductTable>
       <div className="flex justify-end items-center">
         <span className="px-2 font-bold">Total: ${total}</span>
         <button
-          onClick={handleUpdatePrice}
+          onClick={handleUpdate}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Atualizar

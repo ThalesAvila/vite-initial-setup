@@ -51,7 +51,6 @@ export default function Orders() {
       }));
 
       setOrders(ordersResponse);
-      console.log({ ordersResponse });
     })();
   }, [currentUser]);
 
